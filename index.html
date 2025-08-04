@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto E2 - Nuestros Recuerdos</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Preload critical resources -->
+  <link rel="preload" href="timeline/gran-canaria-portrait.jpeg" as="image">
+  <link rel="preload" href="timeline/londres-portrait.jpeg" as="image">
+  <link rel="preload" href="timeline/cadiz-portrait.jpeg" as="image">
+  <link rel="preload" href="timeline/lanzarote-portrait.jpeg" as="image">
+  <link rel="preload" href="timeline/ibiza-portrait.jpeg" as="image">
+  <link rel="preload" href="timeline/tenerife-portrait.jpeg" as="image">
+  <link rel="preload" href="presentation/video-vertical-2.mp4" as="video" type="video/mp4">
+  <link rel="preload" href="presentation/video-vertical-1.mp4" as="video" type="video/mp4">
+</head>
+<body>
+
+  <!-- Sección de bienvenida a pantalla completa -->
+  <section class="hero">
+    <div class="hero-background"></div>
+    <div class="hero-content">
+      <h1>Nuestra Historia</h1>
+      <button id="startBtn">EMPIEZA AQUÍ</button>
+    </div>
+  </section>
+
+  <!-- Secciones scroll que aparecen después -->
+  <section class="memory-section">
+    <div class="video-wrapper">
+      <video autoplay muted loop playsinline>
+        <source src="presentation/video-vertical-1.mp4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+      </video>
+      <div class="vignette"></div>
+    </div>
+    <div class="text-content">
+      <h2>“Desde el primer día...”</h2>
+    </div>
+  </section>
+
+    <section class="memory-section">
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+          <source src="presentation/video-vertical-2.mp4" type="video/mp4" />
+          Tu navegador no soporta video HTML5.
+        </video>
+        <div class="vignette"></div>
+      </div>
+      <div class="text-content">
+        <h2>“Hasta el último...”</h2>
+      </div>
+    </section>
+
+  
+  <section class="end-section">
+    <div class="end-content">
+      <h2>Gracias por cada momento</h2>
+      <p>Ojalá que este rincón de recuerdos perdure en el tiempo.</p>
+      <p>Pd. Te quiero</p>
+      <button onclick="document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' })">Nuestros Recuerdos</button>
+  </div>
+  </section>
+
+
+
+  <!-- Sección de línea de tiempo -->
+  <section class="timeline-section" id="timeline">
+    <div class="timeline-waves"></div>
+    <div class="timeline-slide">
+      <div class="timeline-content">
+        <h3 class="album-title-clickable" data-album="album1">Gran Canaria - 2022</h3>
+        <img src="timeline/gran-canaria-portrait.jpeg" alt="Gran Canaria" />
+      </div>
+    </div>
+
+    <div class="timeline-slide">
+      <div class="timeline-content">
+        <h3 class="album-title-clickable" data-album="album2">Tenerife - 2023</h3>
+        <img src="timeline/tenerife-portrait.jpeg" alt="Tenerife" />
+      </div>
+    </div>
+
+    <div class="timeline-slide">
+      <div class="timeline-content">
+        <h3 class="album-title-clickable" data-album="album3">Londres - 2023</h3>
+        <img src="timeline/londres-portrait.jpeg" alt="Londres" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="timeline-slide">
+      <div class="timeline-content">
+        <h3 class="album-title-clickable" data-album="album4">Cádiz - 2023</h3>
+        <img src="timeline/cadiz-portrait.jpeg" alt="Cádiz" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="timeline-slide">
+      <div class="timeline-content">
+        <h3 class="album-title-clickable" data-album="album5">Lanzarote - 2024</h3>
+        <img src="timeline/lanzarote-portrait.jpeg" alt="Lanzarote" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="timeline-slide">
+      <div class="timeline-content">
+        <h3 class="album-title-clickable" data-album="album6">Ibiza - 2024</h3>
+        <img src="timeline/ibiza-portrait.jpeg" alt="Ibiza" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="timeline-slide">
+      <div class="timeline-content">
+        <h3 class="album-title-clickable" data-album="album7">Asturias - 2024</h3>
+        <img src="timeline/asturias-portrait.jpeg" alt="Asturias" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="timeline-slide">
+      <div class="timeline-content">
+        <h3 class="album-title-clickable" data-album="album8">Viena - 2024</h3>
+        <img src="timeline/vienna-portrait.jpeg" alt="Viena" loading="lazy" />
+      </div>
+    </div>
+  </section>  <!-- Secciones de álbumes - Separadas de la timeline -->
+  <!-- Álbum de Gran Canaria -->
+  <section class="album-section hidden-album" id="album1">
+    <div class="album-header">
+      <h3>Gran Canaria – 2022</h3>
+      <button class="close-album">× Cerrar álbum</button>
+    </div>
+    <div class="album-gallery">
+      <img src="album/gc22/gran-canaria0.jpeg" alt="Foto 0" class="album-item" data-album="album1" loading="lazy"/>
+      <img src="album/gc22/gran-canaria1.jpeg" alt="Foto 1" class="album-item" data-album="album1" loading="lazy"/>
+      <img src="album/gc22/gran-canaria2.jpeg" alt="Foto 2" class="album-item" data-album="album1" loading="lazy"/>
+      <img src="album/gc22/gran-canaria3.jpeg" alt="Foto 3" class="album-item" data-album="album1" loading="lazy"/>
+      <img src="album/gc22/gran-canaria4.jpeg" alt="Foto 4" class="album-item" data-album="album1" loading="lazy"/>
+      <img src="album/gc22/gran-canaria5.jpeg" alt="Foto 5" class="album-item" data-album="album1" loading="lazy"/>
+      <img src="album/gc22/gran-canaria6.jpeg" alt="Foto 6" class="album-item" data-album="album1" loading="lazy"/>
+      <video class="album-item" data-album="album1" muted preload="metadata">
+        <source src="album/gc22/gran-canaria-v1.mp4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
+  </section>
+
+  <!-- Álbum de Tenerife -->
+  <section class="album-section hidden-album" id="album2">
+    <div class="album-header">
+      <h3>Tenerife – 2023</h3>
+      <button class="close-album">× Cerrar álbum</button>
+    </div>
+    <div class="album-gallery">
+      <img src="album/tf22/tenerife1.jpeg" alt="Foto 1" class="album-item" data-album="album2" loading="lazy"/>
+      <img src="album/tf22/tenerife2.jpeg" alt="Foto 2" class="album-item" data-album="album2" loading="lazy"/>
+      <img src="album/tf22/tenerife3.jpeg" alt="Foto 3" class="album-item" data-album="album2" loading="lazy"/>
+      <video class="album-item" data-album="album2" muted preload="metadata">
+        <source src="album/tf22/tenerife-v1.mp4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
+  </section>
+
+  <!-- Álbum de Londres -->
+  <section class="album-section hidden-album" id="album3">
+    <div class="album-header">
+      <h3>Londres – 2023</h3>
+      <button class="close-album">× Cerrar álbum</button>
+    </div>
+    <div class="album-gallery">
+      <!-- Aquí añades tus fotos de Londres -->
+      <!-- Ejemplo: <img src="album/londres23/londres1.jpeg" alt="Foto 1" class="album-item" data-album="album3"/> -->
+    </div>
+  </section>
+
+  <!-- Álbum de Cádiz -->
+  <section class="album-section hidden-album" id="album4">
+    <div class="album-header">
+      <h3>Cádiz – 2023</h3>
+      <button class="close-album">× Cerrar álbum</button>
+    </div>
+    <div class="album-gallery">
+      <!-- Aquí añades tus fotos de Cádiz -->
+      <!-- Ejemplo: <img src="album/cadiz23/cadiz1.jpeg" alt="Foto 1" class="album-item" data-album="album4"/> -->
+    </div>
+  </section>
+
+  <!-- Álbum de Lanzarote -->
+  <section class="album-section hidden-album" id="album5">
+    <div class="album-header">
+      <h3>Lanzarote – 2024</h3>
+      <button class="close-album">× Cerrar álbum</button>
+    </div>
+    <div class="album-gallery">
+      <!-- Aquí añades tus fotos de Lanzarote -->
+      <!-- Ejemplo: <img src="album/lanzarote24/lanzarote1.jpeg" alt="Foto 1" class="album-item" data-album="album5"/> -->
+    </div>
+  </section>
+
+  <!-- Álbum de Ibiza -->
+  <section class="album-section hidden-album" id="album6">
+    <div class="album-header">
+      <h3>Ibiza – 2024</h3>
+      <button class="close-album">× Cerrar álbum</button>
+    </div>
+    <div class="album-gallery">
+      <!-- Aquí añades tus fotos de Ibiza -->
+      <!-- Ejemplo: <img src="album/ibiza24/ibiza1.jpeg" alt="Foto 1" class="album-item" data-album="album6"/> -->
+    </div>
+  </section>
+
+  <!-- Álbum de Asturias -->
+  <section class="album-section hidden-album" id="album7">
+    <div class="album-header">
+      <h3>Asturias – 2024</h3>
+      <button class="close-album">× Cerrar álbum</button>
+    </div>
+    <div class="album-gallery">
+      <!-- Aquí añades tus fotos de Asturias -->
+      <!-- Ejemplo: <img src="album/asturias24/asturias1.jpeg" alt="Foto 1" class="album-item" data-album="album7"/> -->
+    </div>
+  </section>
+
+  <!-- Álbum de Viena -->
+  <section class="album-section hidden-album" id="album8">
+    <div class="album-header">
+      <h3>Viena – 2024</h3>
+      <button class="close-album">× Cerrar álbum</button>
+    </div>
+    <div class="album-gallery">
+      <!-- Aquí añades tus fotos de Viena -->
+      <!-- Ejemplo: <img src="album/vienna24/vienna1.jpeg" alt="Foto 1" class="album-item" data-album="album8"/> -->
+    </div>
+  </section>
+
+</body>
+
+  <!-- Lightbox mejorado tipo álbum real -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox">×</span>
+    <div class="album-title-lightbox" id="album-title-lightbox"></div>
+    <button class="lightbox-nav prev-photo">‹</button>
+    <button class="lightbox-nav next-photo">›</button>
+    <!-- Controles de auto-play -->
+    <div class="lightbox-controls">
+      <button class="autoplay-btn" id="autoplay-btn" title="Auto-play">⏯️</button>
+      <button class="zoom-btn" id="zoom-btn" title="Zoom">🔍</button>
+    </div>
+    <div class="lightbox-content" id="lightbox-content"></div>
+    <div class="photo-counter">
+      <span id="current-photo">1</span> / <span id="total-photos">1</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Botón flotante para abrir el mapa -->
+  <button id="map-toggle" class="map-toggle-btn">
+    ✈️ Nuestros Destinos
+  </button>
+
+  <!-- Overlay del mapamundi -->
+  <div id="map-overlay" class="map-overlay">
+    <div class="map-container-overlay">
+      <div class="map-header">
+        <h2>Nuestros Destinos</h2>
+        <button class="close-map">✕</button>
+      </div>
+      <div class="map-content">
+        <!-- Mapa mundial con imagen de fondo -->
+        <div class="world-map-container">
+          <!-- Imagen del mapamundi como fondo -->
+          <img src="timeline/mapamundi.jpg" alt="Mapamundi" class="world-map-image">
+          
+          <!-- Marcadores posicionados sobre la imagen -->
+          <div class="map-markers">
+            <!-- Islas Canarias - Marcador agrupado -->
+            <div class="marker canarias-group" 
+                 style="left: 42%; top: 46%;" 
+                 data-title="Islas Canarias">
+              <span class="marker-dot"></span>
+              <span class="marker-label">Islas Canarias</span>
+              <!-- Submenú de las islas -->
+              <div class="canarias-submenu">
+                <div class="submenu-item" data-album="gc22" data-title="Gran Canaria - 2022">
+                  <span class="submenu-dot"></span>
+                  <span class="submenu-label">Gran Canaria</span>
+                </div>
+                <div class="submenu-item" data-album="tf22" data-title="Tenerife - 2022">
+                  <span class="submenu-dot"></span>
+                  <span class="submenu-label">Tenerife</span>
+                </div>
+                <div class="submenu-item" data-album="album5" data-title="Lanzarote - 2024">
+                  <span class="submenu-dot"></span>
+                  <span class="submenu-label">Lanzarote</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Londres - Reino Unido -->
+            <div class="marker" 
+                 style="left: 46%; top: 37%;" 
+                 data-album="album3" 
+                 data-title="Londres - 2023">
+              <span class="marker-dot"></span>
+              <span class="marker-label">Londres</span>
+            </div>
+            
+            <!-- Viena - Austria -->
+            <div class="marker" 
+                 style="left: 51.25%; top: 39%;" 
+                 data-album="album8" 
+                 data-title="Viena - 2024">
+              <span class="marker-dot"></span>
+              <span class="marker-label">Viena</span>
+            </div>
+            
+            <!-- España -->
+            <div class="marker espana-group" 
+                 style="left: 45%; top: 41.5%;" 
+                 data-title="España">
+              <span class="marker-dot"></span>
+              <span class="marker-label">España</span>
+              <!-- Submenú de España -->
+              <div class="espana-submenu">
+                <div class="submenu-item" data-album="album7" data-title="Asturias - 2024">
+                  <span class="submenu-dot"></span>
+                  <span class="submenu-label">Asturias</span>
+                </div>
+                <div class="submenu-item" data-album="album4" data-title="Cádiz - 2023">
+                  <span class="submenu-dot"></span>
+                  <span class="submenu-label">Cádiz</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Islas Baleares - Marcador agrupado -->
+            <div class="marker baleares-group" 
+                 style="left: 48%; top: 42%;" 
+                 data-title="Islas Baleares">
+              <span class="marker-dot"></span>
+              <span class="marker-label">Islas Baleares</span>
+              <!-- Submenú de las Baleares -->
+              <div class="baleares-submenu">
+                <div class="submenu-item" data-album="album6" data-title="Ibiza - 2024">
+                  <span class="submenu-dot"></span>
+                  <span class="submenu-label">Ibiza</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Amsterdam - Países Bajos (destino futuro) -->
+            <div class="marker" style="left: 48%; top: 38%;" data-album="future5" data-title="Amsterdam - Próximamente">
+              <span class="marker-dot"></span>
+              <span class="marker-label">Amsterdam</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</html>

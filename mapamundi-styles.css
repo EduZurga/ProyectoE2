@@ -1,0 +1,403 @@
+/* ======================== MAPAMUNDI INTERACTIVO ======================== */
+
+.world-map-section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #101c29 0%, #1a2f42 50%, #0f1a24 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Título del mapa */
+.map-title {
+  color: #bdb294;
+  font-size: 3rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeInDown 1s ease-out 0.5s both;
+}
+
+/* Contenedor del mapa */
+.map-container {
+  width: 90vw;
+  max-width: 1200px;
+  height: 60vh;
+  min-height: 400px;
+  position: relative;
+  background: rgba(16, 28, 41, 0.8);
+  border-radius: 20px;
+  border: 2px solid rgba(189, 178, 148, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+/* SVG del mapa mundial */
+.world-map {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.world-map:active {
+  cursor: grabbing;
+}
+
+/* Países del mapa */
+.country {
+  fill: rgba(189, 178, 148, 0.1);
+  stroke: rgba(189, 178, 148, 0.3);
+  stroke-width: 0.5;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.country.visited {
+  fill: rgba(189, 178, 148, 0.3);
+  cursor: pointer;
+}
+
+.country.visited:hover {
+  fill: rgba(189, 178, 148, 0.5);
+  stroke: rgba(189, 178, 148, 0.8);
+  stroke-width: 1;
+  filter: drop-shadow(0 0 10px rgba(189, 178, 148, 0.6));
+}
+
+/* Marcadores de destinos */
+.marker {
+  fill: #bdb294;
+  r: 6;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: pulse 2s infinite;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 2;
+}
+
+.marker:hover {
+  r: 10;
+  fill: #d4c9a4;
+  stroke: rgba(255, 255, 255, 0.6);
+  filter: drop-shadow(0 0 15px rgba(189, 178, 148, 0.8));
+  animation: none;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6; 
+    transform: scale(1.2);
+  }
+}
+
+/* Tooltip para marcadores */
+.marker-tooltip {
+  position: absolute;
+  background: linear-gradient(145deg, rgba(189, 178, 148, 0.95), rgba(189, 178, 148, 0.85));
+  color: #101c29;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -100%) translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.marker:hover + .marker-tooltip,
+.marker-tooltip.visible {
+  opacity: 1;
+  transform: translate(-50%, -100%) translateY(-5px);
+}
+
+/* ======================== VIDEO PLAYER OVERLAY ======================== */
+
+.video-player-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.video-player-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Contenedor del video */
+.video-container {
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  max-width: 1400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  transform: scale(0.8);
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.video-player-overlay.active .video-container {
+  transform: scale(1);
+}
+
+/* Video principal */
+#main-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Información del destino */
+.video-info {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background: linear-gradient(145deg, rgba(16, 28, 41, 0.9), rgba(16, 28, 41, 0.7));
+  backdrop-filter: blur(15px);
+  padding: 20px 30px;
+  border-radius: 15px;
+  border: 1px solid rgba(189, 178, 148, 0.3);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.video-player-overlay.active .video-info {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.video-info h2 {
+  color: #bdb294;
+  font-size: 1.8rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-style: italic;
+  margin: 0 0 5px 0;
+}
+
+.video-info p {
+  color: rgba(189, 178, 148, 0.8);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Navegación entre videos */
+.video-navigation {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.video-player-overlay.active .video-navigation {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  transition-delay: 0.4s;
+}
+
+.nav-video {
+  background: linear-gradient(145deg, rgba(189, 178, 148, 0.9), rgba(189, 178, 148, 0.7));
+  color: #101c29;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-video::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-video:hover::before {
+  left: 100%;
+}
+
+.nav-video:hover {
+  background: linear-gradient(145deg, #bdb294, #d4c9a4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(189, 178, 148, 0.4);
+}
+
+.nav-video:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Botón cerrar video */
+.close-video {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: linear-gradient(145deg, rgba(16, 28, 41, 0.9), rgba(16, 28, 41, 0.7));
+  border: 2px solid rgba(189, 178, 148, 0.3);
+  color: #bdb294;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.video-player-overlay.active .close-video {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.close-video:hover {
+  background: linear-gradient(145deg, rgba(189, 178, 148, 0.2), rgba(189, 178, 148, 0.1));
+  border-color: rgba(189, 178, 148, 0.5);
+  transform: translateY(0) scale(1.1);
+  color: #d4c9a4;
+}
+
+/* ======================== RESPONSIVE DESIGN ======================== */
+
+@media (max-width: 768px) {
+  .map-title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .map-container {
+    width: 95vw;
+    height: 50vh;
+    min-height: 300px;
+  }
+  
+  .marker {
+    r: 8;
+  }
+  
+  .marker:hover {
+    r: 12;
+  }
+  
+  .video-container {
+    width: 95vw;
+    height: 85vh;
+  }
+  
+  .video-info {
+    top: 20px;
+    left: 20px;
+    padding: 15px 20px;
+  }
+  
+  .video-info h2 {
+    font-size: 1.4rem;
+  }
+  
+  .video-navigation {
+    bottom: 20px;
+    gap: 15px;
+  }
+  
+  .nav-video {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .close-video {
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* ======================== ANIMACIONES ESPECIALES ======================== */
+
+/* Efecto de "vuelo" entre países */
+@keyframes flyToCountry {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.2) translate(var(--fly-x, 0), var(--fly-y, 0));
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+/* Partículas de fondo */
+.map-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 30%, rgba(189, 178, 148, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, rgba(189, 178, 148, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(189, 178, 148, 0.04) 0%, transparent 50%);
+  animation: particleFloat 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(-30px) rotate(180deg);
+  }
+}
