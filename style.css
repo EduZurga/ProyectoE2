@@ -702,8 +702,8 @@ body, html {
 
 /* Animaciones de entrada para el timeline */
 .timeline-slide {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1;
+  transform: translateY(0);
   animation: slideInUp 0.8s ease forwards;
 }
 
